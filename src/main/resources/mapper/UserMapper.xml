@@ -3,7 +3,44 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.backend.user.mapper.UserMapper">
-    <!-- 1. -->
-    <!-- 2. -->
-    <!-- 3. -->
+    <!-- 1. 로그인 (아이디, 비밀번호 확인)-->
+    <select id="findUserByIdPwd" parameterType="String" resultType="com.example.backend.user.vo.UserVO">
+        SELECT id AS userId, pwd, name, gender, age
+        FROM User
+        WHERE id = #{userId} and pwd = #{pwd}
+    </select>
+
+
+    <!-- 2. 회원가입 (인적사항 추가)-->
+    <!-- 신규 사용자 등록, 우선 회원가입 시 모든 내용 다 입력하는 것으로 해놓음 -->
+    <insert id="insertUser" parameterType="UserVO">
+        INSERT INTO User (id, pwd, name, gender, age)
+        VALUES (#{userId}, #{pwd}, #{name}, #{gender}, #{age})
+    </insert>
+
+
+    <!-- 3. 프로필 변경 (인적사항 수정)-->
+    <!-- 3-1. 이름, 성별, 나이를 한 번에 변경하는 UI  -->
+    <update id="updateUserInfo" parameterType="UserVO">
+        UPDATE User
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="age != null">age = #{age},</if>
+        </set>
+        WHERE id = #{userId}
+    </update>
+
+    <!-- 3-2. 비밀번호 변경 (일반 정보 변경과 별도로) -->
+    <update id="updateUserPwd" parameterType="map">
+        UPDATE User
+        SET pwd = #{pwd}
+        WHERE id = #{userId}
+    </update>
+
+
+    <!-- 4. 회원 탈퇴   -->
+    <delete id="deleteUser" parameterType="String">
+        DELETE FROM User WHERE id = #{userId}
+    </delete>
 </mapper>

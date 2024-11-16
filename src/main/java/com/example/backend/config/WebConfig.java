@@ -1,6 +1,7 @@
 package com.example.backend.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -11,7 +12,12 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-// @ComponentScan(basePackages = {})
+@ComponentScan(basePackages = {
+        "com.example.backend.user.controller",
+        "com.example.backend.account.controller",
+        "com.example.backend.roombasic.controller",
+        "com.example.backend.transaction.controller"
+})
 public class WebConfig implements WebMvcConfigurer {
 
     public WebConfig(){

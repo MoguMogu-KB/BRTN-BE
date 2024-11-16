@@ -3,6 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.backend.account.mapper.AccountMapper">
-    <!-- 1. -->
+    <!-- 1. 모임통장 개설 (새로운 모임 통장 계좌번호 추가) -->
+    <insert id="insertSharingAccount">
+        INSERT INTO SharingAccount (id, accountNumber)
+        VALUES (#{userId}, #{accountNumber})
+    </insert>
+
     <!-- 2. -->
 </mapper>

@@ -5,8 +5,10 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
@@ -20,8 +22,18 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @PropertySource({"classpath:/application.properties"})
-// @MapperScan(basePackages = {})
-// @ComponentScan(basePackages = {})
+@MapperScan(basePackages = {
+        "com.example.backend.user.mapper",
+        "com.example.backend.account.mapper",
+        "com.example.backend.roombasic.mapper",
+        "com.example.backend.transaction.mapper"
+})
+@ComponentScan(basePackages = {
+        "com.example.backend.user.service",
+        "com.example.backend.account.service",
+        "com.example.backend.roombasic.service",
+        "com.example.backend.transaction.service"
+})
 public class AppConfig {
     public AppConfig() {
         System.out.println("AppConfig created");
@@ -61,6 +73,10 @@ public class AppConfig {
         sessionFactory.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
 
         Resource[] mapperLocations = new Resource[] {
+                new ClassPathResource("mapper/UserMapper.xml"),
+                new ClassPathResource("mapper/AccountMapper.xml"),
+                new ClassPathResource("mapper/RoomBasicMapper.xml"),
+                new ClassPathResource("mapper/TransactionMapper.xml"),
         };
         sessionFactory.setMapperLocations(mapperLocations);
 

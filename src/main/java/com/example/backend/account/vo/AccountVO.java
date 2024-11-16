@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class AccountVO {
-    // 1.
-    // 2.
+    private String userId; // 계좌를 가진 사용자 ID
+    private String accountNumber; // 계좌번호 14자리 (xxxxxx-xx-xxxxxx)
 }

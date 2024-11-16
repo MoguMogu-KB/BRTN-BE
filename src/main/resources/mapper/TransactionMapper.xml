@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.backend.transaction.mapper.TransactionMapper">
+    <!-- 1. 출금(송금, 이체) 내역 저장 - 거래 상대 계좌, 내역 입력 -->
+    <insert id="insertSendingTransaction" parameterType="TransactionVO">
+        INSERT INTO Transaction (accountNumber, information, amount, time)
+        VALUES (#{accountNumber}, #{information}, #{amount}, #{time});
+    </insert>
+
+    <!-- 2. 해당 계좌의 전체 거래 내역 조회 -->
+    <select id="getTransactionHistory" parameterType="String" resultType="TransactionVO">
+        SELECT time, accountNumber, information, amount
+        FROM Transaction
+        WHERE accountNumber = #{accountNumber}
+        ORDER BY time DESC;
+    </select>
+
+
+    <!-- 3. -->
+</mapper>

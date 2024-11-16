@@ -3,8 +3,29 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.backend.roombasic.mapper.RoomBasicMapper">
-    <!-- 1. -->
-    <!-- 2. -->
-    <!-- 3. -->
-    <!-- 4. -->
+    <!-- 1. 방 개설 (새로운 방 개설하면 상세 내용 추가) - RoomList-->
+    <insert id="insertRoom" parameterType="RoomBasicVO">
+        INSERT INTO RoomList (roomNum, accountNumber, title, category, numberTotal, period, dueDate, privateOrPublic)
+        VALUES (#{roomNum}, #{accountNumber}, #{title}, #{category}, #{numberTotal}, #{period}, #{dueDate}, #{privateOrPublic});
+    </insert>
+
+
+    <!-- 2. 사용자 추가 (새로운 방 개설하면 개설한 사람의 역할이 방장으로 설정되어 추가) - PersonList-->
+    <insert id="insertTeamLeader" parameterType="map">
+        INSERT INTO PersonList (roomNum, id, role)
+        VALUES (#{roomNum}, #{id}, '팀장');
+    </insert>
+
+
+    <!-- 3. 방 세부 내용 변경   -->
+    <update id="updateRoomBasic" parameterType="RoomBasicVO">
+        UPDATE RoomList
+        SET title = #{title},
+            category = #{category},
+            numberTotal = #{numberTotal},
+            period = #{period},
+            dueDate = #{dueDate},
+            privateOrPublic = #{privateOrPublic}
+        WHERE roomNum = #{roomNum} AND accountNumber = #{accountNumber};
+    </update>
 </mapper>
