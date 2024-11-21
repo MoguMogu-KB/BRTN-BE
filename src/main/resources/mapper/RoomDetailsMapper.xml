@@ -97,10 +97,12 @@
     </select>
 
     <!--20 시작시 계정 추가-->
-    <insert id="addAccount" parameterType="map">
-        INSERT INTO RoomComplete (subscribeId, subscribePwd)
-        VALUES (#{subscribeId}, #{subscribePwd})
-    </insert>
+    <update id="addAccount" parameterType="map">
+        UPDATE RoomComplete
+        SET subscribeId = #{subscribeId},
+            subscribePwd = #{subscribePwd}
+        WHERE roomNum = #{roomNum}
+    </update>
     
     <!--21 계정 수정-->
     <update id="updateAccount">

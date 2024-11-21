@@ -58,8 +58,14 @@ public class RoomDetailsServiceImpl implements RoomDetailsService {
     }
     //20 시작시 계정 추가
     @Override
-    public void addAccount(String subscribeId, String subscribePwd) {
-        roomDetailsMapper.addAccount(subscribeId, subscribePwd);
+    public void addAccount(int roomNum, String subscribeId, String subscribePwd) {
+        // 계정 추가 (업데이트)
+        int updatedRows = roomDetailsMapper.addAccount(roomNum, subscribeId, subscribePwd);
+
+        // 업데이트된 행이 없으면 추가 불가능 상태 처리
+        if (updatedRows == 0) {
+            throw new IllegalArgumentException("해당 방 번호가 존재하지 않습니다: " + roomNum);
+        }
     }
 
     //21 계정 수정

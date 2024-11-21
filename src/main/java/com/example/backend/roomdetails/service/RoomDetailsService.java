@@ -34,7 +34,7 @@ public interface RoomDetailsService {
     List<RoomListVO> selectMyRoomList(String id);
 
     //20 시작시 아이디 비밀번호 추가
-    void addAccount(String subscribeId, String subscribePwd);
+    void addAccount(int roomNun, String subscribeId, String subscribePwd);
 
     //21 계정 수정
     void updateAccount(int roomNum, String subscribeId, String subscribePwd);
