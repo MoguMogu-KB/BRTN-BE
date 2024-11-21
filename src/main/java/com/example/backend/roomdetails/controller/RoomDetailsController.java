@@ -58,14 +58,14 @@ public class RoomDetailsController {
 
     // 17. 이번 달 회비 납부하기 버튼 -> 모임통장 거래내역 추가
     @PostMapping("/add-transaction")
-    public void insertTransaction(@RequestParam String accountNumber,
+    public String insertTransaction(@RequestParam String accountNumber,
                                   @RequestParam String transactionDetails,
                                   @RequestParam int amount) {
         try {
             roomDetailsService.insertTransaction(accountNumber, transactionDetails, amount);
-            System.out.println("success");
+            return "Payment Successfully.";
         }catch (Exception e){
-            System.out.println("fail  "+e.getMessage());
+            return "Payment Failed.";
         }
     }
     //20 시작시 계정추가

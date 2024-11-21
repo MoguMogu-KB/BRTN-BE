@@ -14,8 +14,8 @@
     <!-- 2. 회원가입 (인적사항 추가)-->
     <!-- 신규 사용자 등록, 우선 회원가입 시 모든 내용 다 입력하는 것으로 해놓음 -->
     <insert id="insertUser" parameterType="UserVO">
-        INSERT INTO User (id, pwd, name, gender, age)
-        VALUES (#{userId}, #{pwd}, #{name}, #{gender}, #{age})
+        INSERT INTO User (id, pwd, name, gender, age, warning)
+        VALUES (#{userId}, #{pwd}, #{name}, #{gender}, #{age}, 0)
     </insert>
 
 

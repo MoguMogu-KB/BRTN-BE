@@ -10,6 +10,6 @@ public class UserVO {
     private String pwd;
     private String name;
     private String gender;
-    private Integer age; // null 허용 때문에 Integer
-    private Integer warning;
+    private Integer age;
+    private Integer warning;// null 허용 때문에 Integer
 }
