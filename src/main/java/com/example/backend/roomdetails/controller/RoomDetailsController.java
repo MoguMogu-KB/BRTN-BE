@@ -63,24 +63,25 @@ public class RoomDetailsController {
                                   @RequestParam int amount) {
         try {
             roomDetailsService.insertTransaction(accountNumber, transactionDetails, amount);
-            System.out.println("납부 확인");
+            System.out.println("success");
         }catch (Exception e){
-            System.out.println("납부 안함  "+e.getMessage());
+            System.out.println("fail  "+e.getMessage());
         }
     }
-//    //20 시작시 계정추가
-//    @PostMapping("/account")
-//    public ResponseEntity<String> addAccount(
-//            @RequestParam String subscribeId,
-//            @RequestParam(required = false, defaultValue = "") String subscribePwd
-//    ) {
-//        try {
-//            roomDetailsService.addAccount(subscribeId, subscribePwd);
-//            return ResponseEntity.ok("계정이 성공적으로 추가되었습니다.");
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("계정 추가 실패: " + e.getMessage());
-//        }
-//    }
+    //20 시작시 계정추가
+    @PostMapping("/account")
+    public ResponseEntity<String> addAccount(
+            @RequestParam int roomNum,
+            @RequestParam String subscribeId,
+            @RequestParam(required = false, defaultValue = "") String subscribePwd
+    ) {
+        try {
+            roomDetailsService.addAccount(roomNum,subscribeId, subscribePwd);
+            return ResponseEntity.ok("계정이 성공적으로 추가되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("계정 추가 실패: " + e.getMessage());
+        }
+    }
 
 
 

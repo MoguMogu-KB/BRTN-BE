@@ -2,12 +2,10 @@ package com.example.backend.roomdetails.mapper;
 
 import com.example.backend.roomdetails.dto.*;
 import com.example.backend.roomlist.vo.RoomListVO;
-import com.example.backend.user.vo.UserVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Date;
 
 @Mapper
 public interface RoomDetailsMapper {
@@ -33,14 +31,16 @@ public interface RoomDetailsMapper {
                            @Param("amount") int amount);
 
     //20 시작시 계정 추가
-    void addAccount(
-    @Param("subscribeId")
-    String subscribeId,
-    @Param("subscribePwd")
-    String subscribePwd);
+    int addAccount(
+            @Param("roomNum")
+            int roomNum,
+            @Param("subscribeId")
+            String subscribeId,
+            @Param("subscribePwd")
+            String subscribePwd);
 
     //21 계정 수정
-    void updateAccount(@Param("roomNum")int roomNum,@Param("subscribeId") String subscribeId, @Param("subscribePwd")String subscribePwd);
+    void updateAccount(@Param("roomNum") int roomNum, @Param("subscribeId") String subscribeId, @Param("subscribePwd") String subscribePwd);
 
     // 22. 비밀번호 랜덤 값 생성
     String randomPassword();
